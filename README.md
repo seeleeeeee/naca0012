@@ -5,7 +5,7 @@ Compare aerodynamic performance of NACA 0012 airfoil at 0° and 15° angles of a
 
 ## Setup
 - **Solver:** `foamRun` (incompressibleFluid)
-- **Turbulence:** LaunderSharmaKE (RAS)
+- **Turbulence:** Shear Stress Transport (SST)
 - **Velocity:** 40 m/s
 - **Reynolds number:** ~ 4 × 10⁵
 
