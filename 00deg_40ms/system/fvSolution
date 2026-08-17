@@ -41,6 +41,24 @@ solvers
         tolerance       1e-08;
         relTol          0.1;
     }
+
+    k
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-05;
+        relTol          0.1;
+        nSweeps         2;
+    }
+
+    omega
+    {
+        solver          smoothSolver;
+        smoother        symGaussSeidel;
+        tolerance       1e-05;
+        relTol          0.1;
+        nSweeps         2;
+    }
 }
 
 SIMPLE
