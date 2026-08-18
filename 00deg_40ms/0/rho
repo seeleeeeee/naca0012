@@ -10,6 +10,10 @@ dimensions      [1 -3 0 0 0 0 0];
 internalField   uniform 1.225;
 boundaryField
 {
+    aerofoil
+    {
+        type            zeroGradient;
+    }
     inlet
     {
         type            fixedValue;
@@ -19,11 +23,11 @@ boundaryField
     {
         type            zeroGradient;
     }
-    walls
+    back
     {
-        type            zeroGradient;
+        type            empty;
     }
-    frontAndBack
+    front
     {
         type            empty;
     }

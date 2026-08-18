@@ -54,7 +54,7 @@ functions
     {
         type            forceCoeffs;
         libs            ("libforces.so");
-        patches         (walls);
+        patches         (aerofoil);
         rho             rhoInf;
         log             true;
         writeControl    timeStep;
