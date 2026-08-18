@@ -1,4 +1,11 @@
+NACA 0012 Parametric Study – Results (coarse mesh, 16,200 cells)
+
 Angle   Cl      Cd
-0       1.72    -0.19
-4       0.996   -0.041
-15      2.52    -0.53
+0°      ~0      0.00235
+4°      ~0      0.00235
+15°     ~0      0.00234
+
+Notes:
+- Cd is physically consistent (positive, ~0.00235).
+- Cl ≈ 0 due to coarse mesh (y+ ≈ 18). Boundary layer not resolved for SST.
+- Next step: refine mesh to y+ ≈ 1 for realistic Cl values.

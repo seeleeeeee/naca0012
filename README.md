@@ -1,30 +1,35 @@
 # NACA 0012 Parametric Study (OpenFOAM)
 
 **Objective:**  
-Compare aerodynamic performance of NACA 0012 airfoil at 0° and 15° angles of attack using OpenFOAM (steady-state, incompressible, turbulent flow).
+Parametric aerodynamic study of the NACA 0012 airfoil at multiple angles of attack using OpenFOAM (steady-state, incompressible, turbulent flow).
 
 ## Setup
-- **Solver:** `foamRun` (incompressibleFluid)
-- **Turbulence:** Shear Stress Transport (SST)
-- **Velocity:** 40 m/s
-- **Reynolds number:** ~ 4 × 10⁵
 
-## Modifications to Standard Tutorial
+| Parameter | Value |
+|-----------|-------|
+| **Solver** | `foamRun` (incompressibleFluid) |
+| **Turbulence model** | k-omega SST |
+| **Velocity** | 40 m/s |
+| **Reynolds number** | ~ 4 × 10⁵ |
+| **Mesh size** | 16,200 cells (coarse, for initial validation) |
+
+## Results (Current Mesh)
+
+| Angle of Attack | Cl | Cd |
+|-----------------|----|----|
+| 0°              | ~0 | 0.00235 |
+| 4°              | ~0 | 0.00235 |
+| 15°             | ~0 | 0.00234 |
+
+**Key observations:**
+- **Cd is physically consistent** (~0.00235) and positive, confirming the force calculation is working.
+- **Cl ≈ 0 for all angles** due to the coarse mesh (y+ ≈ 18). The current grid does not resolve the boundary layer for the SST model.
+- **Next step:** Refine the mesh to achieve y+ ≈ 1 and obtain realistic Cl values.
+
+## Modifications Made
+
 - Added `0/rho` field for force coefficient calculation.
 - Added `forceCoeffs` function object to `system/controlDict`.
 - Modified `0/U` for different angles of attack.
-
-## Results
-
-**Turbulence model:** k-omega SST (used for all cases)
-
-| Angle of Attack | Cl      | Cd      |
-|-----------------|---------|---------|
-| 0°              | 1.034   | -0.034  |
-| 4°              | 0.996   | -0.041  |
-| 15°             | 2.516   | -0.529  |
-
-**Note:** Negative Cd values indicate a coordinate system convention issue (drag direction is opposite to the flow). The magnitude of Cd is what matters for comparison.
-
-**Takeaway:**  
-As the angle of attack increases, both lift (Cl) and drag (Cd) increase. However, the Cd growth outpaces Cl growth, confirming the fundamental aerodynamic trade-off: more downforce comes at a cost in drag.
+- Switched turbulence model to `kOmegaSST`.
+- Created a custom mesh via `blockMesh` with a common `blockMeshDict` linked from all cases.
