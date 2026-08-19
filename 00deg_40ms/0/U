@@ -8,25 +8,20 @@ dimensions      [0 1 -1 0 0 0 0];
 internalField   uniform (40 0 0);
 boundaryField
 {
+    inlet
+    {
+        type            fixedValue;
+        value           uniform (40 0 0);
+    }
+    outlet
+    {
+        type            zeroGradient;
+    }
     aerofoil
     {
         type            noSlip;
     }
-    inlet
-    {
-        type            freestreamVelocity;
-        freestreamValue $internalField;
-    }
-    outlet
-    {
-        type            freestreamVelocity;
-        freestreamValue $internalField;
-    }
-    back
-    {
-        type            empty;
-    }
-    front
+    frontAndBack
     {
         type            empty;
     }
